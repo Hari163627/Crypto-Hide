@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CryptoHide — Test Version</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Баннер ТЕСТ -->
+  <div class="test-banner">
+    ⚠️ ТЕСТОВАЯ ВЕРСИЯ — монеты не имеют реальной ценности
+  </div>
+
+  <!-- Шапка -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">H</span>
+      <span class="logo-text" id="pageTitle">CryptoHide</span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+  </header>
+
+  <!-- Контент -->
+  <main class="app-main">
+
+    <!-- ============ КОШЕЛЁК ============ -->
+    <section class="page active" id="page-wallet">
+
+      <div class="wallet-balance">
+        <div class="label">Общий баланс</div>
+        <div class="value">
+          <span id="balanceValue">₽ 1 853 804.83</span>
+          <span class="eye" id="eyeToggle" title="Скрыть/показать">👁</span>
+        </div>
+        <div class="sub">в <b id="balanceCurrency">RUB</b></div>
+      </div>
+
+      <div class="wallet-actions">
+        <button class="wallet-action" data-action="deposit">
+          <span class="icon deposit">↙</span>
+          <span>Пополнить</span>
+        </button>
+        <button class="wallet-action" data-action="withdraw">
+          <span class="icon withdraw">↗</span>
+          <span>Вывести</span>
+        </button>
+        <button class="wallet-action" data-action="history">
+          <span class="icon history">▤</span>
+          <span>История</span>
+        </button>
+      </div>
+
+      <div class="assets-header">
+        <div class="assets-title">Мои активы ›</div>
+        <div class="assets-hide" id="hideSmallToggle">Скрыть мелкие балансы</div>
+      </div>
+
+      <ul class="coins-list" id="coinsList"></ul>
+
+    </section>
+
+    <!-- ============ БИРЖА ============ -->
+    <section class="page" id="page-exchange">
+      <h1>Биржа</h1>
+      <p>Здесь будет стакан ордеров и форма покупки/продажи. (Часть 3)</p>
+    </section>
+
+    <!-- ============ P2P ============ -->
+    <section class="page" id="page-p2p">
+      <h1>P2P Маркет</h1>
+      <p>Здесь будет P2P-маркет. (Часть 4)</p>
+    </section>
+
+    <!-- ============ ЕЩЁ ============ -->
+    <section class="page" id="page-more">
+      <h1>Ещё</h1>
+      <p>Здесь будет сетка разделов. (Часть 5)</p>
+    </section>
+
+  </main>
+
+  <!-- Нижнее меню -->
+  <nav class="bottom-nav">
+    <a class="nav-item active" data-page="wallet"   data-title="CryptoHide">
+      <span class="nav-icon">👛</span><span class="nav-label">Кошелёк</span>
+    </a>
+    <a class="nav-item" data-page="exchange" data-title="Биржа">
+      <span class="nav-icon">📊</span><span class="nav-label">Биржа</span>
+    </a>
+    <a class="nav-item" data-page="p2p" data-title="P2P Маркет">
+      <span class="nav-icon">🔁</span><span class="nav-label">P2P</span>
+    </a>
+    <a class="nav-item" data-page="more" data-title="Ещё">
+      <span class="nav-icon">▦</span><span class="nav-label">Ещё</span>
+    </a>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
