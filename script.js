@@ -200,5 +200,138 @@
 
   /* ---------- Первый рендер ---------- */
   renderCoins(false);
+      /* ==============================
+         Биржа
+         ============================== */
+      const exchangePair = {
+        base: "GRAM",
+        quote: "USDT",
+        lastPrice: 181.04,
+        availableUsdt: 22157.903309,
+        maxBuyGram: 122.392307274
+      };
 
+      const orderBook = {
+        asks: [
+          { price: 385.00, amount: 23.366 },
+          { price: 384.90, amount: 74.957 },
+          { price: 350.00, amount: 3270 },
+          { price: 349.99, amount: 1060 },
+          { price: 349.98, amount: 7543 },
+          { price: 349.97, amount: 348.729 }
+        ],
+        bids: [
+          { price: 181.04, amount: 2720 },
+          { price: 181.02, amount: 16263 },
+          { price: 181.00, amount: 3800 },
+          { price: 180.92, amount: 22 },
+          { price: 180.84, amount: 207 },
+          { price: 180.80, amount: 44.643 }
+        ]
+      };
+
+      let tradeSide = "buy"; // buy | sell
+
+      function renderOrderBook() {
+        const ob = document.getElementById("orderbook");
+        if (!ob) return;
+
+        function rowsHTML(list, cls) {
+          return list.map(function (r) {
+            return (
+              '<div class="ob-row">' +
+                '<span class="price">' + r.price.toFixed(2) + '</span>' +
+                '<span class="amount">' + (r.amount >= 1000
+                  ? (r.amount / 1000).toFixed(2) + "K"
+                  : r.amount.toFixed(3)) + '</span>' +
+              '</div>'
+            );
+          }).join("");
+        }
+
+        ob.innerHTML =
+          '<div class="orderbook-col asks">' + rowsHTML(orderBook.asks, "asks") + '</div>' +
+          '<div class="orderbook-col bids">' + rowsHTML(orderBook.bids, "bids") + '</div>';
+      }
+
+      /* ---- Переключение Купить/Продать ---- */
+      const tabBuy = document.getElementById("tabBuy");
+      const tabSell = document.getElementById("tabSell");
+      const tradeSubmit = document.getElementById("tradeSubmit");
+
+      function setSide(side) {
+        tradeSide = side;
+        if (!tabBuy || !tabSell || !tradeSubmit) return;
+
+        tabBuy.classList.toggle("active", side === "buy");
+        tabSell.classList.toggle("active", side === "sell");
+        tradeSubmit.classList.toggle("sell-mode", side === "sell");
+        tradeSubmit.textContent = (side === "buy" ? "Купить " : "Продать ") + exchangePair.base;
+      }
+
+      if (tabBuy) tabBuy.addEventListener("click", function () { setSide("buy"); });
+      if (tabSell) tabSell.addEventListener("click", function () { setSide("sell"); });
+
+      /* ---- Слайдер ---- */
+      const slider = document.getElementById("percentSlider");
+      const inputAmount = document.getElementById("inputAmount");
+      const inputPrice = document.getElementById("inputPrice");
+
+      if (slider && inputAmount) {
+        slider.addEventListener("input", function () {
+          const pct = Number(slider.value) / 100;
+          const price = parseFloat(inputPrice.value) || exchangePair.lastPrice;
+          const maxAmount = exchangePair.availableUsdt / price;
+          const amount = maxAmount * pct;
+          inputAmount.value = amount > 0 ? amount.toFixed(6) : "";
+        });
+      }
+
+      if (inputAmount && slider) {
+        inputAmount.addEventListener("input", function () {
+          const price = parseFloat(inputPrice.value) || exchangePair.lastPrice;
+          const amount = parseFloat(inputAmount.value) || 0;
+          const maxAmount = exchangePair.availableUsdt / price;
+          if (maxAmount > 0) {
+            slider.value = Math.min(100, Math.round((amount / maxAmount) * 100));
+          }
+        });
+      }
+
+      /* ---- Тип ордера (Лимитный / Рыночный) ---- */
+      const orderTypeBtn = document.getElementById("orderTypeBtn");
+      const orderTypeText = document.getElementById("orderTypeText");
+      let orderTypeIndex = 0;
+      const orderTypes = ["Лимитный ордер", "Рыночный ордер"];
+
+      if (orderTypeBtn) {
+        orderTypeBtn.addEventListener("click", function () {
+          orderTypeIndex = (orderTypeIndex + 1) % orderTypes.length;
+          orderTypeText.textContent = orderTypes[orderTypeIndex];
+        });
+      }
+
+      /* ---- Кнопка отправки ---- */
+      if (tradeSubmit) {
+        tradeSubmit.addEventListener("click", function () {
+          const title = tradeSide === "buy" ? "Купить " : "Продать ";
+          showModal(
+            title + exchangePair.base,
+            "Это тестовая функция. Реальные монеты не покупаются и не продаются."
+          );
+        });
+      }
+
+      /* ---- Нижние вкладки (просто визуально) ---- */
+      document.querySelectorAll(".exchange-bottom-tabs .tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          document.querySelectorAll(".exchange-bottom-tabs .tab")
+            .forEach(function (t) { t.classList.remove("active"); });
+          tab.classList.add("active");
+        });
+      });
+
+      /* ---- Первый рендер ---- */
+      renderOrderBook();
+      setSide("buy");
 })();
