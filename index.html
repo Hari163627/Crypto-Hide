@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CryptoHide — Test Version</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Подключаем официальный SDK Telegram Mini Apps -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+  <!-- Верхний баннер "ТЕСТ" -->
+  <div class="test-banner">
+    ⚠️ ТЕСТОВАЯ ВЕРСИЯ — монеты не имеют реальной ценности
+  </div>
+
+  <!-- Шапка -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">₿</span>
+      <span class="logo-text">CryptoHide</span>
+    </div>
+    <button id="themeToggle" class="theme-toggle" title="Сменить тему">🌙</button>
+  </header>
+
+  <!-- Основной контент -->
+  <main class="app-main">
+
+    <!-- Баланс -->
+    <section class="balance-card">
+      <div class="balance-label">Общий баланс</div>
+      <div class="balance-value" id="balanceValue">0.00 USDT</div>
+      <div class="balance-usd" id="balanceUsd">≈ $0.00</div>
+      <div class="balance-actions">
+        <button class="btn btn-primary" data-action="buy">Купить</button>
+        <button class="btn btn-secondary" data-action="sell">Продать</button>
+        <button class="btn btn-secondary" data-action="send">Перевести</button>
+      </div>
+    </section>
+
+    <!-- Быстрые действия -->
+    <section class="quick-actions">
+      <button class="quick-btn" data-action="deposit">
+        <span class="quick-icon">⬇️</span>
+        <span>Пополнить</span>
+      </button>
+      <button class="quick-btn" data-action="withdraw">
+        <span class="quick-icon">⬆️</span>
+        <span>Вывести</span>
+      </button>
+      <button class="quick-btn" data-action="swap">
+        <span class="quick-icon">🔄</span>
+        <span>Обменять</span>
+      </button>
+      <button class="quick-btn" data-action="history">
+        <span class="quick-icon">📜</span>
+        <span>История</span>
+      </button>
+    </section>
+
+    <!-- Список монет -->
+    <section class="coins-section">
+      <div class="section-title">Мои активы</div>
+      <ul class="coins-list" id="coinsList">
+        <!-- Заполняется из script.js -->
+      </ul>
+    </section>
+
+    <!-- История транзакций -->
+    <section class="history-section">
+      <div class="section-title">Последние операции</div>
+      <ul class="history-list" id="historyList">
+        <!-- Заполняется из script.js -->
+      </ul>
+    </section>
+
+    <!-- Дисклеймер внизу -->
+    <p class="disclaimer">
+      CryptoHide — демонстрационный проект. Все балансы, монеты и транзакции вымышлены.
+      Не является финансовым сервисом.
+    </p>
+
+  </main>
+
+  <!-- Модалка при входе -->
+  <div class="modal-overlay" id="welcomeModal">
+    <div class="modal">
+      <h2>Добро пожаловать в CryptoHide</h2>
+      <p class="modal-warn">Это <b>тестовая версия</b> интерфейса.</p>
+      <p>Все монеты, балансы и операции — <b>ненастоящие</b> и не несут реальной ценности.</p>
+      <button class="btn btn-primary" id="welcomeOk">Понятно, продолжить</button>
+    </div>
+  </div>
+
+  <!-- Модалка для действий -->
+  <div class="modal-overlay" id="actionModal">
+    <div class="modal">
+      <h2 id="actionTitle">Действие</h2>
+      <p id="actionBody">Это тестовая функция.</p>
+      <button class="btn btn-primary" id="actionClose">Закрыть</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
