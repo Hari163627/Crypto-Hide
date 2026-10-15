@@ -63,9 +63,73 @@
     </section>
 
     <!-- ============ БИРЖА ============ -->
+        <!-- ============ БИРЖА ============ -->
     <section class="page" id="page-exchange">
-      <h1>Биржа</h1>
-      <p>Здесь будет стакан ордеров и форма покупки/продажи. (Часть 3)</p>
+
+      <div class="exchange-pair">
+        <div class="pair">
+          <span>GRAM / USDT</span>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="spread">0.01</div>
+      </div>
+
+      <div class="exchange-stats">
+        <div>Изменение за 24ч <b id="exChange">0.00%</b></div>
+        <div>Объём за 24ч (USDT) <b id="exVolume">11 866.71</b></div>
+      </div>
+
+      <div class="trade-tabs">
+        <div class="trade-tab buy active" id="tabBuy">Купить</div>
+        <div class="trade-tab sell" id="tabSell">Продать</div>
+      </div>
+
+      <div class="order-type" id="orderTypeBtn">
+        <span id="orderTypeText">Лимитный ордер</span>
+        <span class="value">▾</span>
+      </div>
+
+      <div class="trade-row">
+        <div class="trade-field">
+          <div class="field-label">Цена (USDT)</div>
+          <input type="text" id="inputPrice" value="181.04" inputmode="decimal" />
+        </div>
+        <div class="trade-field">
+          <div class="field-label">Сумма (GRAM)</div>
+          <input type="text" id="inputAmount" placeholder="0" inputmode="decimal" />
+        </div>
+      </div>
+
+      <div class="slider-wrap">
+        <input type="range" class="slider" id="percentSlider" min="0" max="100" value="0" />
+      </div>
+      <div class="slider-percents">
+        <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+      </div>
+
+      <div class="available-block">
+        <div class="row">
+          <span>Доступно</span>
+          <b>22 157.903309 USDT</b>
+        </div>
+        <div class="row">
+          <span>Макс. покупка</span>
+          <b id="maxBuy">122.392307274 GRAM</b>
+        </div>
+      </div>
+
+      <button class="trade-submit" id="tradeSubmit">Купить GRAM</button>
+
+      <div class="orderbook" id="orderbook" style="margin-top:20px;">
+        <!-- заполняется из JS -->
+      </div>
+
+      <div class="exchange-bottom-tabs">
+        <div class="tab active">Открытые ордера</div>
+        <div class="tab">История ордеров</div>
+        <div class="tab">Сделки</div>
+      </div>
+
     </section>
 
     <!-- ============ P2P ============ -->
